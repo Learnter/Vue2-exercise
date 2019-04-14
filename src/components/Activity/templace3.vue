@@ -7,7 +7,7 @@
         </v-back>
         <div class="activity_main" ref="activity">
             <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" topDropText="" topPullText="" :auto-fill="false" @bottom-status-change="handleBottomChange" ref="loadmore">
-                <div class="activity_m_top ">
+                <div class="activity_m_top">
                     <div>
                          <img :src="activity_Data.dimg"></img>
                     </div>
@@ -48,37 +48,45 @@ export default {
             pageNumber: 1,
             allLoaded: false,/*数据是否获取完*/
             bottomStatus: '',/*上拉底部的状态值*/
+            scrollPosition:0,
             activity_ID: 0,
-            activity_Data: [],
+            activity_Data:"",
             splitData: [],
         }
     },
-    created() {
+    created(){
         this.activity_ID = this.$route.query.id;
         this.fetchData();
         this.fetchBottomData();
+    },
+    mounted() {
+        this.$refs.activity.addEventListener("scroll",this.handleScroll,false);
     },
     methods: {
         fetchData() {
             var url = "https://www.dshui.cc/adwap/loadAd?adid="+this.activity_ID+"&token=";
             this.$axios.get(url).then((result) => {
-                this.activity_Data = result.data.data;
-                this.isShow = true;
+                this.$nextTick(() => {
+                    this.activity_Data = result.data.data;
+                    this.isShow = true;
+                })
+                
             })
         },
         fetchBottomData() {
             var url = "https://www.dshui.cc/adwap/queryAdGoods?adid="+this.activity_ID+"&pageNo="+this.pageNumber+"&token=";
-            // console.log(url);
             this.$axios.get(url).then((result) => {
-                if (result && result.data.data) {
-                    var data = result.data.data;
-                     if(data.length > 0){
-                        this.splitData = this.splitData.concat(result.data.data);
-                     }else{
-                        // 若数据已全部获取完毕 
-                        this.allLoaded = true;
-                     }
-                } 
+                this.$nextTick( () => {
+                    if (result && result.data.data) {
+                        var data = result.data.data;
+                        if (data.length > 0) {
+                            this.splitData = this.splitData.concat(result.data.data);
+                        } else {
+                            // 若数据已全部获取完毕 
+                            this.allLoaded = true;
+                        }
+                    } 
+                }) 
             })
         },
         loadBottom() {
@@ -93,12 +101,36 @@ export default {
             this.$refs.loadmore.onTopLoaded();
         },
         handleBottomChange(status) {
-            // console.log(status);
             this.bottomStatus = status;
+        },
+        handleScroll(){
+            this.scrollPosition = this.$refs.activity.scrollTop;
         }
     },
     components: {
         "v-back": backTrack
+    },
+    activated() {
+        if(this.$route.meta.isUserCache){
+            this.scrollPosition = 0;
+            this.isShow = false;
+            this.pageNumber = 1;
+            this.activity_Data = "";
+            this.splitData = [];
+            this.activity_ID = this.$route.query.id;
+            this.fetchData();
+            this.fetchBottomData();
+        }else{
+            this.$refs.activity.scrollTop = this.scrollPosition;
+        }
+    },
+    beforeRouteLeave (to, from, next) {
+        if(to.name !== "Detail"){
+            from.meta.isUserCache = true;
+        }else{
+            from.meta.isUserCache = false;
+        }
+        next();
     }
 }
 </script>

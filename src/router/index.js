@@ -92,7 +92,7 @@ export default new Router({
       props:true,
       meta:{
         name:"详情页",
-        isKeepAlive:false,
+        isKeepAlive:true,
         isUserCache:false
       }
     },
@@ -131,7 +131,8 @@ export default new Router({
       component: Templace3,
       meta: {
         name: "轮播活动页3",
-        isKeepAlive: false
+        isKeepAlive:true,
+        isUserCache:false
       }
     },
     {

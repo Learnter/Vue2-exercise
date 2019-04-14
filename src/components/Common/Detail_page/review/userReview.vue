@@ -81,18 +81,17 @@ export default {
             this.$refs.loadmore.$el.scrollTop = 0;/*滚动元素的距离设置为0*/
         },
         fetchData(){
-            var _this = this;
             var url = "https://www.dshui.cc/goodswap/queryComment?goodsId="+this.reviewID+"&pageNo="+this.pageNumber;
             // console.log("用户评论页的url:"+url);
             this.$axios.get(url).then((result) => {
-
+                console.log(result.data.data);
                 if( result && result.data.data.length == 0){
                     this.allLoaded = true;
                 }else{
-                     _this.reviewData = _this.reviewData.concat(result.data.data);                  
+                     this.reviewData = this.reviewData.concat(result.data.data);                  
                 }
 
-                _this.lodding = false;
+                 this.lodding = false;
               
             })
         },

@@ -150,18 +150,22 @@ export default {
     },
     created(){
         this.detail_ID = this.$route.query.goodsId;
-        this.getData();
+        this.fetchData();
     },
     methods:{
-        getData(){
+        fetchData(){
             var url = "https://www.dshui.cc/goodswap/goodsDetail?goodsId="+this.detail_ID;
-            // console.log("商品详情页的Url:"+url);
             this.$axios.get(url).then( result => {
-                if(result && result.data.data.length !== 0){               
-                    this.detail_Data = result.data.data;
-                    this.isShow = true;
-                    this.lodding = false;
-                }           
+                if(result && result.data.data){
+                    var data = result.data.data;
+                    if(data.length !== 0){
+                        this.detail_Data = result.data.data;
+                        this.isShow = true;
+                        this.lodding = false;
+                    }else{
+                        console.log("获取详情页数据有误:" + data);
+                    }               
+                }          
             }).catch(error =>{
                 console.log(error);
             })
@@ -170,6 +174,23 @@ export default {
     components: {
         'v-loded':lodding,
         "v-back":backTrack
+    },
+    activated() {
+        if(this.$route.meta.isUserCache){
+            this.detail_Data = "";
+            this.detail_ID = 0;
+            this.isShow = false;
+            this.detail_ID = this.$route.query.goodsId;
+            this.fetchData();
+        }
+    },
+    beforeRouteLeave(to, from, next) {
+        if(to.name !== "UserReview"){
+            from.meta.isUserCache = true;
+        }else{
+            from.meta.isUserCache = false;
+        }
+        next();
     }
 }
 </script>
