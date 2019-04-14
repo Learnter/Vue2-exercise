@@ -340,7 +340,8 @@ export default {
     }
 
     .e_li_left{
-        width:10%;
+        width:0.8rem;
+        height:0.8rem;
         border-radius:50%;
     }
 

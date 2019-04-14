@@ -67,18 +67,18 @@ export default {
             })
         },
         fetchBottomData() {
-            var _this = this;
             var url = "https://www.dshui.cc/adwap/queryAdGoods?adid="+this.activity_ID+"&pageNo="+this.pageNumber+"&token=";
             // console.log(url);
             this.$axios.get(url).then((result) => {
-                if (result && result.data.data.length !== 0) {
-                    _this.splitData = _this.splitData.concat(result.data.data);
-                    // console.log(_this.splitData);
-                } else {
-                    // 若数据已全部获取完毕
-                    _this.allLoaded = true;
-                }
-
+                if (result && result.data.data) {
+                    var data = result.data.data;
+                     if(data.length > 0){
+                        this.splitData = this.splitData.concat(result.data.data);
+                     }else{
+                        // 若数据已全部获取完毕 
+                        this.allLoaded = true;
+                     }
+                } 
             })
         },
         loadBottom() {

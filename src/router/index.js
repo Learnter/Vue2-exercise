@@ -32,6 +32,7 @@ const Templace1 = r => require.ensure([], () => r(require('@/components/Activity
 const Templace2 = r => require.ensure([], () => r(require('@/components/Activity/templace2')),"templace2")
 const Templace3 = r => require.ensure([], () => r(require('@/components/Activity/templace3')),"templace3")
 const Templace4 = r => require.ensure([], () => r(require('@/components/Activity/templace4')),"templace4")
+const Discover = r => require.ensure([], () => r(require('@/components/Discover/discover')),"discover")
 
 Vue.use(Router)
 
@@ -141,6 +142,16 @@ export default new Router({
         name: "轮播活动页4",
         isKeepAlive: true,
         isUserCache:false
+      }
+    },
+    {
+      path: "/discover",
+      name: "Discover",
+      component: Discover,
+      meta: {
+        name: "发现页",
+        isKeepAlive: true,
+        isUserCache: false
       }
     }
   ]

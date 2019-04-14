@@ -166,7 +166,8 @@ export default {
     border-top:1px solid #ececec;
   }
   .r_li_left{
-        width:10%;
+        width:0.8rem;
+        height:0.8rem;
         border-radius:50%;
   }
   .r_li_right{
@@ -180,7 +181,7 @@ export default {
   }
 
   .li_l_left{
-       height:100%;
+        height:100%;
         display:flex;
         flex-direction:column;
         justify-content:space-around;

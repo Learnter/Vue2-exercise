@@ -2,7 +2,7 @@
 (function (win) {
     var cDoc = document;
     var resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize';
-    console.log(window);
+    // console.log(window);
     var cWid = null;
     function loadShow() {
         cWid = cDoc.documentElement.clientWidth || cDoc.body.clientWidth; //获取页面宽度
