@@ -252,6 +252,8 @@ export default {
         }
     .home{
             height: 100%;
+            max-width:640px;
+            margin:0 auto;
             position: relative;
        .home_main{
             background: #f4f4f4;
