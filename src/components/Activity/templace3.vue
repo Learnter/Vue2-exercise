@@ -5,8 +5,11 @@
                 {{$route.query.title}}
             </template>
         </v-back>
+
+        <v-loded :loded="lodding"></v-loded><!--加载遮罩层-->
+
         <div class="activity_main" ref="activity">
-            <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" :bottom-all-loaded="allLoaded" topDropText="" topPullText="" :auto-fill="false" @bottom-status-change="handleBottomChange" ref="loadmore">
+            <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom" topLoadingText="" topDropText="" topPullText="" :auto-fill="false" @bottom-status-change="handleBottomChange" ref="loadmore">
                 <div class="activity_m_top">
                     <div>
                          <img :src="activity_Data.dimg"></img>
@@ -41,9 +44,11 @@
 </template>
 <script>
 import backTrack from "@/components/Common/backTrack ";
+import lodding from "@/components/Common/lodding";
 export default {
     data() {
         return {
+            lodding:true,
             isShow: false,
             pageNumber: 1,
             allLoaded: false,/*数据是否获取完*/
@@ -60,7 +65,7 @@ export default {
         this.fetchBottomData();
     },
     mounted() {
-        this.$refs.activity.addEventListener("scroll",this.handleScroll,false);
+        this.$refs.activity.addEventListener("touchmove",this.handleScroll,false);
     },
     methods: {
         fetchData() {
@@ -81,6 +86,7 @@ export default {
                         var data = result.data.data;
                         if (data.length > 0) {
                             this.splitData = this.splitData.concat(result.data.data);
+                            this.lodding = false;
                         } else {
                             // 若数据已全部获取完毕 
                             this.allLoaded = true;
@@ -102,16 +108,22 @@ export default {
         },
         handleBottomChange(status) {
             this.bottomStatus = status;
+            if(status == "loading"){
+                 this.$refs.loadmore.onBottomLoaded();
+            }
+           
         },
-        handleScroll(){
+        handleScroll(e){
             this.scrollPosition = this.$refs.activity.scrollTop;
         }
     },
     components: {
-        "v-back": backTrack
+        "v-back": backTrack,
+         "v-loded": lodding
     },
     activated() {
         if(this.$route.meta.isUserCache){
+            this.lodding = true;
             this.scrollPosition = 0;
             this.isShow = false;
             this.pageNumber = 1;
@@ -131,12 +143,15 @@ export default {
             from.meta.isUserCache = false;
         }
         next();
+    },
+    destroyed() {
+        this.$refs.activity.removeEventListener("touchmove", this.handleScroll, false);
     }
 }
 </script>
 <style>
     .fontZise{
-        font-size:0.26rem;
+        font-size:1.3rem;
         color:#CECECE;
     }
      img{
@@ -148,29 +163,31 @@ export default {
      }
 
     .a_templace3 {
-        position: absolute;
+        position:absolute;
         top:44px;
         right: 0;
         left: 0;
         bottom: 0;
+        max-width:640px;
+        margin:0 auto;
         z-index: 10;
         background:#f0f0f0;
         overflow:hidden;
-        font-size:0.32rem;
+        font-size:1.6rem;
     }
 
     .activity_main {
         width:100%;
         height:100%;
-        overflow:auto;
+        padding-right:3%;      
+        overflow-y:scroll;
     }
-
     .m_top_right{
         width:100%;
         display:flex;
         justify-content:space-between;
         align-items:center;
-        padding:0.32rem;
+        padding:1.6rem;
         box-sizing:border-box;
         margin-top:10px;
     }
@@ -180,7 +197,7 @@ export default {
     }
     .m_top_right>p{
         text-align:justify;
-        font-size:0.3rem;
+        font-size:1.5rem;
         line-height:22px;
         font-family:行楷;
         color:black;
@@ -215,7 +232,7 @@ export default {
         width:100%;
         height:44px;
         line-height:22px;
-        font-size:0.3rem;
+        font-size:1.5rem;
         color:black;
         padding:0 5px;
         box-sizing:border-box;

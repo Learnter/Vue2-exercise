@@ -195,12 +195,9 @@ export default {
 }
 </script>
 <style >
-    /*.ifont{
-        font-size:0.16rem;
-    }*/
-    
+
     .fontZise{
-        font-size:0.3rem;
+        font-size:1.3rem;
         color:#CECECE;
     }
     .detail_page{
@@ -216,10 +213,12 @@ export default {
         left:0;
         right:0;
         bottom:54px;
+        max-width:640px;
+        margin:0 auto;
         z-index:10;
         background:white;
         overflow:auto;
-        font-size:0.32rem;
+        font-size:1.6rem;
     }
     .d_m_img{
             width:100%;
@@ -239,7 +238,7 @@ export default {
 
     .d_m_name{
         width:100%;
-        height:0.62rem;
+        height:3rem;
         text-align:justify;/*文字对齐*/
         /*文字超出高度后隐藏*/
         display:-webkit-box; 
@@ -250,7 +249,7 @@ export default {
     }
     .d_m_price{
         width:100%;    
-        font-size:0.36rem;
+        font-size:1.8rem;
         color:black;
         display:flex;
         justify-content:flex-start;
@@ -258,30 +257,30 @@ export default {
         margin-top:13px;
     }
     .s_price{
-        font-size:0.26rem;
+        font-size:1.3rem;
         border:1px dotted #808080;
         padding:0.06rem;
-        margin-left:0.16rem;
+        margin-left:0.9rem;
         color:#808080;
     }
     .sale_volums{
         display:flex;
         justify-content:flex-start;
         align-items:center;
-        height:0.62rem;
+        height:3.1rem;
         padding: 5px 10px;
-        font-size:0.26rem;
+        font-size:1.3rem;
         box-shadow: 0 0.5px 0.5px #ececec;
         color:#808080;
     }
 
     .s_v_repertory{
-        margin-left:0.32rem;
+        margin-left:1.6rem;
     }
 
     .save_count{
         width:100%;
-        height:0.96rem;
+        height:4.8rem;
         box-sizing:border-box;
         padding:5px 10px;
         display:flex;
@@ -290,7 +289,7 @@ export default {
     }
     .space{
         width:100%;
-        height:0.16rem;
+        height:0.8rem;
         display:block;
         background:#ececec;
         content:"";
@@ -351,7 +350,7 @@ export default {
 
     .u_e_li{
         width:100%;
-        height:2.56rem;
+        height:12.8rem;
         padding:10px;
         box-sizing:border-box;
         display:flex;
@@ -361,8 +360,8 @@ export default {
     }
 
     .e_li_left{
-        width:0.8rem;
-        height:0.8rem;
+        width:4rem;
+        height:4rem;
         border-radius:50%;
     }
 
@@ -422,7 +421,7 @@ export default {
     .d_i_li{
         box-sizing:border-box;
         display:flex;
-        font-size:0.3rem;
+        font-size:1.3rem;
         margin-top:10px;
         color:black;
         white-space:nowrap;
@@ -447,6 +446,8 @@ export default {
         right:0;
         height:54px;
         z-index:11;
+        max-width:640px;
+        margin:0 auto;
         background:white;
         display:flex;
         justify-content:flex-start;
@@ -455,12 +456,12 @@ export default {
     }
 
     .shop_bar>i{
-        font-size:0.62rem;
+        font-size:3.1rem;
         width:14%;
         border-right:1px solid #ececec;
     }
     .shop_bar>span{
-        font-size:0.32rem;
+        font-size:1.6rem;
         color:black;
         width:28%;
         line-height:54px;
@@ -473,6 +474,8 @@ export default {
         left:0;
         right:0;
         bottom:54px;
+        margin:0 auto;
+        max-width:640px;
         z-index:1000;
     }
 
@@ -507,7 +510,7 @@ export default {
     display:flex;
     justify-content:space-between;
     align-items:center;
-    font-size:0.4rem;
+    font-size:2rem;
   }
 
   .c_top_img{
@@ -520,7 +523,7 @@ export default {
     height: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 0.6rem 0.32rem;
+    padding: 3rem 1.6rem;
     box-sizing: border-box;
     
     color:black;
@@ -540,7 +543,7 @@ export default {
     padding: 10px;
     box-sizing: border-box;
     border-bottom:1px solid #ececec;
-    font-size:0.36rem;
+    font-size:1.8rem;
  }
 
 </style>

@@ -149,9 +149,11 @@ export default {
         right:0;
         bottom:0;
         z-index:10;
+        max-width:640px;
+        margin:0 auto;
         background:white;
         overflow:hidden;
-        font-size:0.32rem;
+        font-size:1.6rem;
     }
 
     .goods{
@@ -163,10 +165,10 @@ export default {
 
     .goods_li{
         width:100%;
-        height:2.22rem;
+        height:11rem;
         display:flex;
         justify-content:flex-start;
-        padding:0.16rem;
+        padding:10px;
         box-sizing:border-box;
         box-shadow: 0 0.5px 0.5px #ececec;
     }
@@ -179,7 +181,7 @@ export default {
     .r_good{
         width:75%;
         height:100%;
-        padding:0.16rem 0.32rem 0rem 0.16rem;
+        padding:10px 10px 0 10px;
         display:flex;
         flex-direction:column;
         justify-content:flex-start;
@@ -191,8 +193,8 @@ export default {
         height:50%;
         box-sizing:border-box;
         text-align:justify;/*文字对齐*/
-        line-height:22px;
-        font-size:0.24rem;
+        line-height:20px;
+        font-size:1.2rem;
         /*文字超出高度后隐藏*/
         display:-webkit-box; 
         -webkit-box-orient:vertical;
@@ -216,7 +218,7 @@ export default {
     }
 
     .g_b_right{
-        font-size:0.24rem;
+        font-size:1.2rem;
         
     }
 

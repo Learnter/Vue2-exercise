@@ -16,7 +16,7 @@
         var nHtml = cDoc.getElementsByTagName("html")[0];
         if (cWid <= 720) {
             // console.log(cWid);
-            nHtml.style.fontSize = 100 * (cWid / 750) + "px";
+            nHtml.style.fontSize = 100 * (cWid / 750/5) + "px";
             // console.log(nHtml.style.fontSize);
         }
     }

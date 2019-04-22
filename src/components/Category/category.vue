@@ -1,25 +1,42 @@
 <template>
-    <div class="category">
-            <search-top class="search" @click.native ="$router.push({name:'Search_box'})"></search-top>
-            <div class="category_main">
-                    <div class="cate_Aside" ref="category_left">
-                            <ul class="cate_list">
-                                <li class="cate_li" v-for="(item,index) in category_list" id="item.id" :key="item.id" @click="toggle_list(index,item.id)">
-                                   <span :class="selected == index?'active':''"> {{item.name}} </span>
-                                </li>
-                            </ul>
-                    </div>       
-         </div>  
-         <div class="main"  >
-                     <component v-bind:is="tabComponent" :cateData="mainData"></component>     
-         </div>   
+    <div class="category">      
+                <div class="cate_content"> 
+                    <div class="cateTop">
+                        <div class="cate_Search" @click.native="$router.push({name:'Search_box'})">
+                            <i class="iconfont searchI">&#xe609;</i>
+                            <div>搜索喜欢的宝贝</div>
+                        </div>
+                    </div>
+                    
+                    <div class="cate_main">
+                        <div class="main_left">
+                          <div class="cate_Aside" ref="category_left">    
+                            <mt-loadmore :top-method="loadTop" :bottom-method="loadBottom"  
+                                topLoadingText="" topDropText="" topPullText="" :auto-fill="false"
+                                bottomPullText="" bottomDropText="" bottomLoadingText="" ref="loadmore">  
+                             
+                                <ul class="cate_list">
+                                    <li class="cate_li" v-for="(item,index) in category_list" id="item.id" :key="item.id" @click="toggle_list(index,item.id)">
+                                        <span :class="selected == index?'active':''"> {{item.name}} </span>
+                                    </li>
+                                </ul>
+
+                            </mt-loadmore>  
+                        </div>                      
+                    </div>  
+
+                    <div class="main_right"  >
+                                <component v-bind:is="tabComponent" :cateData="mainData"></component>     
+                    </div> 
+
+                </div>
+         </div>     
     </div> 
 </template>
 <script>
         /*右侧动态组件*/
 import category_list from './Cate_Children/categoryList';
 import cateGlobal from "./Cate_Children/cateGlobal";
-import searchTop from "../common/searchTop";
 
 export default {
     data:function(){
@@ -30,7 +47,14 @@ export default {
             selected:0,
             category_list:null,
             mainData:null,
-            tabComponent:"category_list"
+            tabComponent:"category_list",
+            option:{
+                topLoadingText:"",
+                topDropText:"",
+                topPullText:"",
+                autoFill:false
+
+            }
         }
     },
     created(){
@@ -79,29 +103,78 @@ export default {
         handleScroll(value){
             this.leftPosition = this.$refs.category_left.scrollTop;
 
-        }
+        },
+        loadTop() {
+            this.$refs.loadmore.onTopLoaded();
+        },
+        loadBottom() {
+            // 加载更多数据
+            if (!this.allLoaded) {
+                this.$refs.loadmore.onBottomLoaded();
+            }
+        },
     },
     components:{
         category_list,
         cateGlobal,
-        searchTop
     }
   
 }
 </script>
-<style scoped>
+<style lang="scss" scoped>
     .category{
-        width:100%;
-        height:100%;
-        font-size:0.32rem;
+        position: relative;
+        width: 100%;
+        height: 100%;
+        background: #fff;
+        color: #000;
+        max-width:640px;
     }
-
-    .category_main{
-        position:absolute;
-        width:27%;
+    .cate_content{
+        position:fixed;
+        top:0;
         left:0;
-        top:52px;
+        right:0;
         bottom:64px;
+        max-width:640px;
+        margin: 0 auto;
+        background: #fff;
+        display:flex;
+        flex-direction:column;
+        justify-content:flex-start;
+        align-items:flex-start;
+        font-size:1.5rem;
+
+    }
+    .cateTop{
+        width:100%;
+        max-width: 640px;
+        min-height:34px;
+        background: #fff;
+        color: #000;
+        display:flex;
+        justify-content:center;
+        align-items:center;
+           border-bottom: 1px solid #f2f2f2;
+        .cate_Search{
+            width:60%;
+            height:100%;
+            padding:5px 0;
+            box-sizing:border-box;
+            border-radius:8px;
+            display:flex;
+            justify-content: flex-start;
+            align-items:center;
+            background:#F0f0f0;
+            
+        }
+    }
+    .cate_main{
+        display:flex;
+        justify-content:flex-start;
+    }
+    .main_left{
+        width:27%;
         border-right: 1px solid #f2f2f2;
         box-sizing:border-box;
         overflow:hidden;
@@ -110,6 +183,7 @@ export default {
         width:110%;
         height:100%;
         overflow-y:scroll;    
+        -webkit-overflow-scrolling:touch;
     }
 
     .cate_list{
@@ -136,20 +210,18 @@ export default {
         padding:0.06rem 0;
     }
 
-    .main{
-        position:absolute;
-        width:73%;
-        right:0;
-        top:52px;
-        bottom:64px;
-        box-sizing:border-box;
+    .main_right{
+        flex:1;
+        padding:1rem 1rem 0; 
         overflow:hidden;
     }
     .search{
-        position:fixed;
+        position:absolute;;
         left:0;
         top:0;
         right:0;
+        max-width:640px;
+        margin:0 auto;
     }
     
 

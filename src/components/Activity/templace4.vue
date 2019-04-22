@@ -119,6 +119,8 @@ export default {
         top:44px;
         background:#f0f0f0;
         z-index:10;
+        max-width:640px;
+        margin:0 auto;
         overflow:auto;
     }
 

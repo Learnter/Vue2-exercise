@@ -73,7 +73,7 @@ export default {
        this.fetchData();
     },
     mounted() {
-        this.$refs.loadmore.$el.addEventListener("scroll",this.handdleScroll,false);
+        this.$refs.loadmore.$el.addEventListener("touchmove",this.handdleScroll,false);
     },
     methods:{
         returnTop(){
@@ -84,7 +84,7 @@ export default {
             var url = "https://www.dshui.cc/goodswap/queryComment?goodsId="+this.reviewID+"&pageNo="+this.pageNumber;
             // console.log("用户评论页的url:"+url);
             this.$axios.get(url).then((result) => {
-                console.log(result.data.data);
+                // console.log(result.data.data);
                 if( result && result.data.data.length == 0){
                     this.allLoaded = true;
                 }else{
@@ -130,7 +130,8 @@ export default {
       bottom:0;
       z-index:100;
       background:white;
-      font-size:0.32rem;
+      font-size:1.6rem;
+      
   }    
   .u_r_box{
       position:absolute;
@@ -138,25 +139,28 @@ export default {
       top:44px;
       right:0;
       bottom:0;
-      box-sizing:border-box;    
+      box-sizing:border-box;  
+       
   }  
   
   .u_r_main{
        width:102%;
        height:100%;  
-       overflow:auto; 
-       touch-action:none;      
+       max-width:640px;
+       margin:0 auto;
+       overflow-y:scroll; 
+      -webkit-overflow-scrolling: touch;
+            
     }
 
   .u_r_ul{
       width:100%;
       height:100%;
       box-sizing:border-box;
-      /*overflow:auto;*/
   }
   .u_r_li{
     width:100%;
-    height:2.5rem;
+    height:12.5rem;
     padding:10px;
     box-sizing:border-box;
     display:flex;
@@ -165,8 +169,8 @@ export default {
     border-top:1px solid #ececec;
   }
   .r_li_left{
-        width:0.8rem;
-        height:0.8rem;
+        width:4rem;
+        height:4rem;
         border-radius:50%;
   }
   .r_li_right{

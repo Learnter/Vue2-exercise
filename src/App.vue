@@ -1,9 +1,11 @@
 <template>
   <div id="app">
-    <keep-alive >
-        <router-view v-if="$route.meta.isKeepAlive"/>
-    </keep-alive>
-        <router-view v-if="!$route.meta.isKeepAlive"/>
+    <div class="index">
+        <keep-alive >
+            <router-view v-if="$route.meta.isKeepAlive"/>
+        </keep-alive>
+            <router-view v-if="!$route.meta.isKeepAlive"/>
+    </div>    
 
     <tab-list></tab-list>
   </div>
@@ -26,8 +28,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  box-sizing:border-box;
   overflow:hidden;
-  margin-bottom:64px;
+  height:100% !important;
+}
+
+.index{
+  width:100%;
+  height:100%;
 }
 </style>

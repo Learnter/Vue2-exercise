@@ -74,14 +74,14 @@ export default {
     .cate_box{
         width:103%;
         height:100%; 
-        padding:0.2rem 0.2rem 0;
+        padding:2rem 2rem 0;
         box-sizing:border-box;
         overflow-y:scroll;      
     }
 
     .h_img{
         width:100%;
-        height:2rem;
+        height:10rem;
     }
     .h_img>img{
         width:100%;
@@ -101,20 +101,20 @@ export default {
     }
     .footer_li{
         width:50%;
-        height:1.6rem;
-        padding:0.06rem;
+        height:13rem;
+        padding:0.3rem;
         box-sizing:border-box;
     }
     .footer_li>img{
         width:100%;
         height:100%;
-        border-radius:0.03rem;
+        border-radius:3px;
     }
     .cate_tips{
         display:flex;
         justify-content:flex-start;
         align-items:center;
         color:black;
-        margin:0.12rem 0 0.03rem 0;
+        margin:0.6rem 0 0.2rem 0;
     }
 </style>

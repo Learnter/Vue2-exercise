@@ -64,7 +64,9 @@ export default {
         position:fixed;
         bottom:0px;
         right:0px;
-        width:100%;
+        left:0px;
+        max-width:640px;
+        margin:0 auto;
         height:64px;
         box-shadow:0 -0.5px 1px gray;
         background:white;

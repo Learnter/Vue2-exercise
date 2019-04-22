@@ -58,16 +58,12 @@ export default {
       }
   },
   created() {
-      console.log("从首页进入活动页:created");
       this.activity_ID = this.$route.query.id;
       this.fetchData();
-      this.fetchBottomData();
-     
+      this.fetchBottomData();    
   },
   mounted(){       
-        console.log("从首页进入活动页:mounted"); 
-        this.$refs.activity.addEventListener("scroll", this.handleScroll, false);
-             
+        this.$refs.activity.addEventListener("touchmove", this.handleScroll, false);            
   },
   computed:{
       splitData(){
@@ -99,7 +95,6 @@ export default {
          })
      },
     handleScroll(){
-         
          this.scrollPositon = this.$refs.activity.scrollTop;
 
          if(this.$refs.activity.scrollTop > 1000){
@@ -154,39 +149,39 @@ export default {
       next();
   },
   beforeDestroy() {
-      console.log("销毁监听");
-      this.$refs.activity.removeEventListener("scroll", this.handleScroll, false);
+      this.$refs.activity.removeEventListener("touchmove", this.handleScroll, false);
   }
 }
 </script>
 <style>
     .templace1{
         position:absolute;;
-        top:0;
+        top:44px;
         right:0;
         left:0;
         bottom:0;
-        background:#ccc;
+        background:green;
         z-index:10;
+        max-width:640px;
+        margin:0 auto;
         overflow:hidden;
-        font-size:0.32rem;
+        font-size:1.6rem;
     }
 
     .activity_main{
         width:100%;
         height:100%;
-        overflow:auto;
+        overflow-y:scroll;
     }
-
     .recommend{
         width:100%;
-        height:0.96rem;
-        line-height:0.96rem;
-        font-size:0.6rem;
+        height:4.8rem;
+        line-height:4.8rem;
+        font-size:1.6rem;
         text-align:center;
         background:black;
         color:yellow;
-        margin:0.32rem 0;
+        margin:1.6rem 0;
     }
     .a_b_ul{
         width:100%;
@@ -215,7 +210,7 @@ export default {
     }
     .a_bottom_li_name{
         color: #333;
-        font-size:0.3rem;
+        font-size:1.5rem;
         height: 46px;
         line-height: 23px;
         margin:5px 0 10px 5px;
@@ -231,15 +226,15 @@ export default {
         display:flex;
         justify-content:space-between;
         color:#000;
-        font-size:0.26rem;
+        font-size:1.3rem;
         height:24px;
         line-height:24px;
         padding: 5px 3px; 
-        font-size:0.36rem;      
+        font-size:1.8rem;      
     }
 
     .fontZise{
-        font-size:0.26rem;
+        font-size:1.3rem;
         color:#CECECE;
     }
 </style>

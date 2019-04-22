@@ -80,11 +80,8 @@ export default {
         handleBottomChange(status) {
             // console.log(status);
             this.bottomStatus = status;
-            if(this.bottomStatus == "loading"){
-                var _this = this;
-                setTimeout(function() {
-                    _this.bottomStatus = "pull";
-                },2000);
+            if(status == "loading"){
+              this.$refs.loadmore.onBottomLoaded();
             }
         }
     },
@@ -95,14 +92,17 @@ export default {
 </script>
 <style>
 .a_templace2{
-    position: absolute;
+    position:absolute;
     top:44px;
     right: 0;
     left: 0;
     bottom: 0;
     background:#ccc;
     z-index:10;
+    max-width:640px;
+    margin:0 auto;
     overflow:hidden;
+    font-size:1.6rem;
 }
 
 .activity_main {
