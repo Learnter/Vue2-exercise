@@ -18,13 +18,15 @@ export default {
     },
     mounted() {
          //阻止页面的滑动默认事件；如果碰到滑动问题，1.2 请注意是否获取到 touchmove
-        this.$refs.drap.addEventListener("touchmove", function(event) {
-            event.preventDefault();
-        }, { passive: false });
+
     },
    methods: {
         // 实现移动端拖拽
         down() {
+
+             //点击动画时不允许home页面滚动
+            $("body").addClass("show");
+
             this.flags = true;
             var touch;
             if (event.touches) {
@@ -57,6 +59,8 @@ export default {
         //鼠标释放时候的函数
         end() {
             this.flags = false;
+            //松开动画时释放home页面滚动
+            $("body").removeClass("show");
         },
     }
 }

@@ -9,6 +9,7 @@ import Mint from "mint-ui";
 import 'mint-ui/lib/style.css';
 import"./assets/css/iconfont.css";//引入字体库样式
 import"../static/common.js";//移动端适配方案;
+import $ from 'jquery';
 
 Vue.use(Mint);
 
